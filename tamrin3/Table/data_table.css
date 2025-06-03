@@ -1,0 +1,20 @@
+<!-- Load DataTables CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- جدول -->
+<table id="myDataTable" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Addres</th>
+      <th>Doc</th>
+      <th>Score</th>
+      <th>Rate</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- جاوااسکریپت پر می‌کنه -->
+  </tbody>
+</table>
