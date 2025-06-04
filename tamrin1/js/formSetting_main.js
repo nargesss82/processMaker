@@ -1,3 +1,6 @@
+
+
+
 // Define all sections with their configuration
 const sections = [
   {
@@ -97,8 +100,6 @@ sections.forEach(section => {
     $header.append('<span class="icon">►</span>');
   }
 });  
-
-
 function showS() {
   const value = $("#drp_status").getControl().val();
   if (value != "0") {
@@ -114,3 +115,4 @@ function showS() {
 
 showS(); // اجرای تابع در ابتدا
 $("#drp_status").change(showS); // اضافه کردن event listener
+

@@ -8,7 +8,6 @@ function sendAjaxRequestUser() {
     }else{
       var nationalID = $("#txt_nationalCode").getValue();
     }
-
     console.log("National ID:", nationalID);
 
     var dataInfo = {
@@ -160,12 +159,12 @@ $("#btn_submit").click(function (e) {
     }
   }
 
-  if (!isValid) {
-    alert(errorMessages.join("\n"));
-    e.preventDefault();
-  } else {
-    Promise.all([sendAjaxRequestUser(), sendAjaxRequestPostalCode()])
-      .then(([userResponse, postalResponse]) => {
+if (!isValid) {
+  alert(errorMessages.join("\n"));
+  e.preventDefault();
+} else {
+  Promise.all([sendAjaxRequestUser(), sendAjaxRequestPostalCode()])
+    .then(([userResponse, postalResponse]) => {
       let errorMessages = [];
 
       // بررسی پاسخ درخواست کدملی
@@ -188,18 +187,18 @@ $("#btn_submit").click(function (e) {
         e.preventDefault();
       } else {
         // اگر هر دو درخواست موفق بودند و هیچ خطایی نداشتند، فرم را ارسال کنید
-        $("#31261142868259c7f34e4b5091340326").submitForm();
+        $("#191185800682dc59e7c9c54079966353").submitForm();
       }
     })
-      .catch((error) => {
+    .catch((error) => {
       // مدیریت خطاهای AJAX
       console.error("AJAX Error:", error);
       alert(
         "Failed to process request. Check console for details. Response: " +
-        (error.xhr.responseText || "").substring(0, 200)
+          (error.xhr.responseText || "").substring(0, 200)
       );
       e.preventDefault();
     });
-  }
+}
 });
 
