@@ -1,36 +1,35 @@
 <?php
-$act = $_POST['act']??'' ;
+// دریافت مقدار عمل (action) از درخواست POST
+$act = $_POST['act'] ?? '';
 
-// دریافت dataInfo و تبدیل به آرایه
+// دریافت داده‌ها به صورت JSON و تبدیل به آرایه PHP
 $dataInfoRaw = $_POST['dataInfo'] ?? '{}';
 $dataInfo = json_decode($dataInfoRaw, true);
 
-$nationalID = $dataInfo['national_id'] ;
-//die(json_encode(['act'=>$act]));
+// دریافت کد ملی از داده‌های ورودی
+$nationalID = $dataInfo['national_id'];
+
+// اگر عمل درخواست شده بررسی وجود کاربر باشد
 if ($act == "checkUserExists") {
 
-
 	try {
-		
-
-
-		
+		// مقدار نام کاربری برابر کد ملی است
 		$username = $nationalID;
-		$sql = "SELECT EXISTS (SELECT 1 FROM USERS WHERE USR_USERNAME =$username) AS user_exists";
+
+		// کوئری برای بررسی وجود نام کاربری در جدول USERS
+		$sql = "SELECT EXISTS (SELECT 1 FROM USERS WHERE USR_USERNAME = $username) AS user_exists";
+
+		// اجرای کوئری
 		$result = executeQuery($sql);
+
+		// مقدار بولی وجود یا عدم وجود کاربر
 		@@userExists = ($result[1]['user_exists'] == 1);
-		die (json_encode(['result'=>@@userExists]));
-		
+
+		// ارسال نتیجه به صورت JSON و پایان اسکریپت
+		die(json_encode(['result' => @@userExists]));
 
 	} catch (Exception $e) {
-		die(json_encode(['error'=>$e->getMessage()]));
+		// در صورت بروز خطا پیام آن ارسال می‌شود
+		die(json_encode(['error' => $e->getMessage()]));
 	}
 }
-
-
-
-
-
-
-
-

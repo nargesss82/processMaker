@@ -1,11 +1,8 @@
-
-
-
-// Define all sections with their configuration
+// تعریف آرایه‌ی sections که شامل تنظیمات هر بخش است
 const sections = [
   {
-    id: "subtitle0000000001",
-    fields: [
+    id: "subtitle0000000001", // شناسه بخش اول (header)
+    fields: [                 // آرایه‌ای از سلکتورهای فیلدهای داخل این بخش
       "#txt_firstName",
       "#txt_lastName",
       "#txt_nationalCode",
@@ -17,13 +14,13 @@ const sections = [
       "#rad_gender",
       "#txt_birthPlace"
     ],
-    style: {
+    style: {                  // تنظیمات استایل برای هدر بخش
       backgroundColor: "#ddfccc",
       color: "#01574a"
     }
   },
   {
-    id: "subtitle0000000002",
+    id: "subtitle0000000002", // شناسه بخش دوم
     fields: [
       "#txt_legalTelephone",
       "#txt_legalPhone",
@@ -37,7 +34,7 @@ const sections = [
     }
   },
   {
-    id: "subtitle0000000003",
+    id: "subtitle0000000003", // شناسه بخش سوم
     fields: [
       "#txt_postalCode",
       "#drp_province",
@@ -51,7 +48,7 @@ const sections = [
     }
   },
   {
-    id: "subtitle0000000004",
+    id: "subtitle0000000004", // شناسه بخش چهارم
     fields: [
       "#mfi_uploadFile",
       "#txt_file"
@@ -63,56 +60,67 @@ const sections = [
   }
 ];
 
-// Initialize all sections
+// مقداردهی اولیه و آماده‌سازی بخش‌ها
 sections.forEach(section => {
-  // Store visibility state in the section object
+  // ذخیره وضعیت دیداری بخش (باز یا بسته بودن) داخل شیء خود بخش
   section.visible = false;
 
-  // Apply initial styles
+  // گرفتن المنت هدر بخش بر اساس id
   const $header = $(`#${section.id}`);
+
+  // اعمال استایل اولیه به هدر بخش (رنگ پس‌زمینه، رنگ متن، اشاره‌گر موس و ... )
   $header.css({
-    cursor: "pointer",
-    backgroundColor: section.style.backgroundColor,
-    padding: "10px",
-    borderRadius: "6px",
-    marginBottom: "10px",
-    color: section.style.color
+    cursor: "pointer",               // تغییر شکل موس هنگام هاور روی هدر (نمایش کلیک‌خور بودن)
+    backgroundColor: section.style.backgroundColor, // رنگ پس‌زمینه از تنظیمات بخش
+    padding: "10px",                 // فاصله داخلی هدر
+    borderRadius: "6px",             // گوشه‌های گرد
+    marginBottom: "10px",            // فاصله پایین هدر با محتوا یا هدر بعدی
+    color: section.style.color       // رنگ متن از تنظیمات بخش
   });
 
-  // Hide fields initially
+  // پنهان کردن تمام فیلدهای آن بخش در ابتدا (تا وقتی باز نشود نمایش داده نشوند)
   $(section.fields.join(", ")).hide();
 
-  // Add click handler
+  // افزودن رویداد کلیک به هدر بخش
   $header.click(function() {
+    // تغییر وضعیت دیداری بخش به حالت مخالف وضعیت فعلی (نمایش/پنهان)
     section.visible = !section.visible;
 
     if (section.visible) {
+      // اگر بخش باز شد، نمایش فیلدها به صورت انیمیشن اسلاید به پایین
       $(section.fields.join(", ")).slideDown(300);
+      // تغییر آیکون نشان‌دهنده وضعیت به فلش رو به پایین
       $(`#${section.id} .icon`).html("▼");
     } else {
+      // اگر بخش بسته شد، پنهان کردن فیلدها با انیمیشن اسلاید به بالا
       $(section.fields.join(", ")).slideUp(300);
+      // تغییر آیکون به فلش رو به راست
       $(`#${section.id} .icon`).html("►");
     }
   });
 
-  // Add icon if it doesn't exist
+  // اگر آیکون وضعیت (فلش) داخل هدر وجود ندارد، آن را اضافه کن
   if ($(`#${section.id} .icon`).length === 0) {
     $header.append('<span class="icon">►</span>');
   }
-});  
+});
+
+// تابعی برای نمایش یا پنهان کردن بخش‌ها بر اساس مقدار دراپ‌داون وضعیت
 function showS() {
+  // گرفتن مقدار فعلی کنترل دراپ‌داون وضعیت
   const value = $("#drp_status").getControl().val();
+
   if (value != "0") {
+    // اگر مقدار غیر صفر است، بخش دوم را نمایش بده و بخش اول را پنهان کن
     $("#subtitle0000000002").show();
     $("#subtitle0000000001").hide();
   } else {
+    // اگر مقدار صفر است، بخش اول را نمایش بده و بخش دوم را پنهان کن
     $("#subtitle0000000002").hide();
     $("#subtitle0000000001").show();
   }
 }
 
-// اجرای اولیه بعد از اینکه DOM کاملاً لود شد
-
-showS(); // اجرای تابع در ابتدا
-$("#drp_status").change(showS); // اضافه کردن event listener
-
+// اجرای اولیه پس از اینکه کل صفحه (DOM) بارگذاری شد
+showS();                  // اجرای تابع یک بار برای تعیین نمایش اولیه بخش‌ها
+$("#drp_status").change(showS); // افزودن شنونده رویداد تغییر مقدار دراپ‌داون، برای بروز رسانی نمایش بخش‌ها هنگام تغییر
