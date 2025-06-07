@@ -1,18 +1,25 @@
-<!-- Load DataTables CSS & JS -->
+<!--
+بارگذاری CSS و JS کتابخانه DataTables (نسخه 1.13.6)
+این کتابخانه باعث می‌شود جدول HTML امکانات پیشرفته‌ای مثل جستجو، مرتب‌سازی، صفحه‌بندی و ... داشته باشد
+-->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<!-- جدول -->
+<!-- تعریف جدول HTML با شناسه myDataTable -->
 <table id="myDataTable" class="display" style="width:100%">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>ORDER_NAME</th>
-      <th>COST</th>
-      <th>TIME</th>
+      <!-- ستون‌های جدول -->
+      <th>ID</th>           <!-- شناسه رکورد -->
+      <th>ORDER_NAME</th>   <!-- نام سفارش -->
+      <th>COST</th>         <!-- هزینه سفارش -->
+      <th>TIME</th>         <!-- مدت زمان سفارش -->
     </tr>
   </thead>
   <tbody>
-    <!-- جاوااسکریپت پر می‌کنه -->
+    <!--
+    ردیف‌های جدول توسط جاوااسکریپت به صورت داینامیک پر خواهند شد،
+    بنابراین اینجا داده اولیه وجود ندارد
+    -->
   </tbody>
 </table>
