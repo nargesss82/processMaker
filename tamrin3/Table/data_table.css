@@ -1,20 +1,25 @@
-<!-- Load DataTables CSS & JS -->
+<!-- بارگذاری CSS و JavaScript مربوط به افزونه DataTables -->
+<!-- این فایل‌ها ظاهر و عملکرد جدول را حرفه‌ای‌تر می‌کنند -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<!-- جدول -->
+<!-- جدول نمایش داده‌ها با شناسه 'myDataTable' -->
+<!-- کلاس 'display' مربوط به DataTables برای استایل‌دهی اولیه است -->
 <table id="myDataTable" class="display" style="width:100%">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Addres</th>
-      <th>Doc</th>
-      <th>Score</th>
-      <th>Rate</th>
-      <th>Sum</th>
+      <!-- عنوان ستون‌های جدول (هم‌راستا با داده‌هایی که از Ajax میاد) -->
+      <th>Name</th>    <!-- نام شخص -->
+      <th>Addres</th>  <!-- آدرس -->
+      <th>Doc</th>     <!-- شماره یا کد مدرک -->
+      <th>Score</th>   <!-- نمره -->
+      <th>Rate</th>    <!-- ضریب -->
+      <th>Sum</th>     <!-- حاصل ضرب نمره و ضریب -->
     </tr>
   </thead>
+
   <tbody>
-    <!-- جاوااسکریپت پر می‌کنه -->
+    <!-- بخش بدنه جدول که توسط جاوااسکریپت (loadDataTable) پر خواهد شد -->
+    <!-- اطلاعات این بخش با استفاده از Ajax به صورت پویا (دینامیک) از سرور دریافت و اضافه می‌شود -->
   </tbody>
 </table>
